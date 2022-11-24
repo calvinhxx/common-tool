@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import os
 import sys
 import subprocess
 
@@ -9,15 +10,31 @@ def runcmd(command) -> int:
         print(ret.stdout,end="")
     if ret.stderr != "":
         print(ret.stderr,end="")
-    if ret.returncode == 0:
-        sys.exit(0)
+
+def determine_suffix(file):
+    suffix = os.path.splitext(file)[-1]
+    # print(suffix, type(suffix))
+    if  suffix== (".c") or suffix == (".h") or suffix == (".c++") or suffix == (".h++") or suffix == (".cc") or suffix == (".cpp"):
+        return True
     else:
-        sys.exit(1)
+        return False
 
 if __name__ == '__main__':
-    file_filters = "-e '.h' -e '.cpp'"
-    cmd1 = "TempCacheFiles=$(git diff --name-only --cached | grep %s | xargs)"%(file_filters)
-    cmd2 = '''git restore --staged $(echo "$TempCacheFiles" | tr -d '"')'''
-    cmd3 = '''clang-format -i $(echo "$TempCacheFiles" | tr -d '"')'''
-    cmd4 = '''git add $(echo "$TempCacheFiles" | tr -d '"')'''
-    runcmd(cmd1+" && "+cmd2+" && "+cmd3+" && "+cmd4)
+    cmd_getcached = '''git diff --name-only --cached | tr -d '"' | xargs '''
+    ret = subprocess.run(cmd_getcached,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,encoding="utf-8")
+    if ret.returncode == 0:
+        if ret.stdout != "":
+            list = ret.stdout.replace("\n","").split(" ")
+            for file in list:
+                if determine_suffix(file):
+                    runcmd("git restore --staged %s"%(file))
+                    runcmd("clang-format -i  %s"%(file))
+                    runcmd("git add  %s"%(file))
+                else:
+                    pass
+            sys.exit(0)
+        else:
+            sys.exit(0)
+    else:
+        print(ret.stdout,ret.stderr)
+        sys.exit(-1)
