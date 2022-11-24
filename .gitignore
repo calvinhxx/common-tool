@@ -35,4 +35,9 @@
 .DS_Store
 
 # exe module
-.node_modules
+node_modules
+
+# npm config file
+package-lock.json
+package.json
+
