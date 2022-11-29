@@ -34,20 +34,15 @@ def determine_suffix(file):
     else:
         return False
 
+def getcachesfilelist() -> list:
+    ret = subprocess.run("git diff --name-only --cached",shell=False,stdout=subprocess.PIPE,stderr=subprocess.PIPE,encoding="utf-8")
+    return ret.stdout.split("\n")
+
 if __name__ == '__main__':
-    cmd_getcached = '''git diff --name-only --cached | tr -d '"' | xargs '''
-    ret = subprocess.run(cmd_getcached,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,encoding="utf-8")
-    if ret.returncode == 0:
-        if ret.stdout != "":
-            list = ret.stdout.replace("\n","").split(" ")
-            for file in list:
-                if determine_suffix(file):
-                    runcmd("cpplint %s %s"%(CPPLINTARG.replace(" ",""),file))
-                else:
-                    pass
-            sys.exit(0)
+    list = getcachesfilelist()
+    for file in list:
+        if determine_suffix(file):
+            runcmd("cpplint %s %s"%(CPPLINTARG.replace(" ",""),file))
         else:
-            sys.exit(0)
-    else:
-        print(ret.stdout,ret.stderr)
-        sys.exit(-1)
+            pass
+    sys.exit(0)

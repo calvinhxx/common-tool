@@ -13,7 +13,7 @@ def __usage():
     """)
 
 def runcmd(command) -> int: 
-    ret = subprocess.run(command,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,encoding="utf-8")
+    ret = subprocess.run(command,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     if ret.stdout != "":
         print(ret.stdout,end="")
     if ret.stderr != "":
@@ -26,10 +26,10 @@ def runcmd(command) -> int:
 def main(argv):
     if len(argv) != 1:
         __usage()
-        return -1
+        sys.exit(-1)
     else:
         os.chdir(argv[0])
         runcmd('gitmoji-changelog')
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:]))
+    main(sys.argv[1:])

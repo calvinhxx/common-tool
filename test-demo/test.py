@@ -25,11 +25,18 @@ CPPLINTARG = "--filter=-legal/copyright,\
                         -build/c++11"
 
 def runcmd(command) -> int: 
-    ret = subprocess.run(command,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,encoding="utf-8")
-    if ret.stdout != "":
-        print(ret.stdout,end="")
-    if ret.stderr != "":
-        print(ret.stderr,end="")
+    if sys.platform == 'darwin':
+        ret = subprocess.run(command,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,encoding="utf-8")
+        if ret.stdout != "":
+            print(ret.stdout,end="")
+        if ret.stderr != "":
+            print(ret.stderr,end="")
+    elif sys.platform == 'win32':
+        ret = subprocess.run(command,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        if ret.stdout != "":
+            print(ret.stdout)
+        if ret.stderr != "":
+            print(ret.stderr)
 
 if __name__ == '__main__':
     # 编码
