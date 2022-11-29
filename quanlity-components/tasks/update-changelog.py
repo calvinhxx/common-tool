@@ -13,7 +13,7 @@ def __usage():
     """)
 
 def runcmd(command) -> int: 
-    ret = subprocess.run(command,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    ret = subprocess.run(command,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,encoding="utf-8")
     if ret.stdout != "":
         print(ret.stdout,end="")
     if ret.stderr != "":

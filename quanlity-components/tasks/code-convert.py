@@ -34,12 +34,17 @@ def runcmd(command) -> int:
             sys.exit(1)
 
 def getcachesfilestr() -> str:
-    ret = subprocess.run("git diff --name-only --cached",shell=False,stdout=subprocess.PIPE,stderr=subprocess.PIPE,encoding="utf-8")
+    sh = True
+    if sys.platform == 'darwin':
+        sh = True
+    elif sys.platform == 'win32':
+        sh = False
+    ret = subprocess.run("git diff --name-only --cached",shell=sh,stdout=subprocess.PIPE,stderr=subprocess.PIPE,encoding="utf-8")
     str = ''
     for x in ret.stdout.split("\n"):
         str = str + " " + x
     return str
-
+    
 def main(argv):
     if len(argv) != 1:
         __usage()

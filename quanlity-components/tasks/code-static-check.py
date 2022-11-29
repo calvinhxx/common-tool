@@ -35,7 +35,12 @@ def determine_suffix(file):
         return False
 
 def getcachesfilelist() -> list:
-    ret = subprocess.run("git diff --name-only --cached",shell=False,stdout=subprocess.PIPE,stderr=subprocess.PIPE,encoding="utf-8")
+    sh = True
+    if sys.platform == 'darwin':
+        sh = True
+    elif sys.platform == 'win32':
+        sh = False
+    ret = subprocess.run("git diff --name-only --cached",shell=sh,stdout=subprocess.PIPE,stderr=subprocess.PIPE,encoding="utf-8")
     return ret.stdout.split("\n")
 
 if __name__ == '__main__':
