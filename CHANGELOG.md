@@ -10,10 +10,12 @@
 
 ### Fixed
 
+- 🐛 Fix 修复macShell兼容bug [fd5a77e]
 - 🐛 Fix 修复格式化与静态检测bug [927963d]
 
 ### Miscellaneous
 
+- 📝 Update 更新CL、Readme文档 [5660506]
 - 📝 Update 提交更新 CL [63a46c2]
 - 🙈 Update 更新gitignore-file [b04edf8]
 - 🚀 : 部署文档、代码 [efd8004]
