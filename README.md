@@ -2,50 +2,17 @@
 
 Talkline_PC 的一些软件基建、质量工程工具
 
-## Getting started
-
-```
-#in project workspace root path
-sudo ./init.sh
-```
-### Test Demo
-```
-#in project workspace root path
-python3 ./test-demo/test.py
-```
-
-## Content
-
-- [PC COMMON TOOLS](#pc-common-tools)
-  - [Getting started](#getting-started)
-    - [Test Demo](#test-demo)
-  - [Content](#content)
-    - [支持平台](#支持平台)
-    - [环境依赖](#环境依赖)
-        - [Python  依赖](#python--依赖)
-        - [Npm 依赖](#npm-依赖)
-    - [支持功能](#支持功能)
-      - [文件自动转码](#文件自动转码)
-      - [代码格式化](#代码格式化)
-      - [代码静态检测](#代码静态检测)
-      - [git\_commit信息规范检测](#git_commit信息规范检测)
-      - [changelog自动生成](#changelog自动生成)
-
-### 支持平台
-
-- [x] `MAC` Passing
-- [ ] `windows` Todo
-
-### 环境依赖
+### ➕环境依赖
 
 - Python `>=3.7`
 - Npm `>=8.5.5`
 
->通过npm/python3完成依赖包管理。
-若找不到npm/python3, brew install 或者在官网下载安装包
+>通过npm/python3完成依赖包管理。若找不到npm/python3
+Mac: brew install npm（确保brew为国内源）
+win: 官网下载node
 >
 
-##### Python  依赖
+##### Python 依赖
 
 - chardet
 - [cpplint](https://github.com/cpplint/cpplint)
@@ -57,6 +24,48 @@ python3 ./test-demo/test.py
 - [clang-format](https://clang.llvm.org/docs/ClangFormat.html)
 - [gitmoji-changelog](https://github.com/frinyvonnick/gitmoji-changelog)
 
+
+## Getting started
+
+- Mac:
+  **in project workspace root path**
+  `sudo ./init.sh`
+- Win:
+  **in git bash cmd**
+  `./init.sh`
+
+`!!!初始成功,相关依赖安装成功后,注意重启Git Gui/Git Cmd 重载环境变量`
+
+### Test Demo
+```
+#in project workspace root path
+python3 ./test-demo/test.py
+```
+💬 `clean.sh` 清除缓存与产物  
+
+## Content
+
+- [PC COMMON TOOLS](#pc-common-tools)
+    - [➕环境依赖](#环境依赖)
+        - [Python 依赖](#python-依赖)
+        - [Npm 依赖](#npm-依赖)
+  - [Getting started](#getting-started)
+    - [Test Demo](#test-demo)
+  - [Content](#content)
+    - [支持平台](#支持平台)
+    - [支持功能](#支持功能)
+      - [文件自动转码](#文件自动转码)
+      - [代码格式化](#代码格式化)
+      - [代码静态检测](#代码静态检测)
+      - [git\_commit信息规范检测](#git_commit信息规范检测)
+      - [changelog自动生成](#changelog自动生成)
+
+### 支持平台
+
+- ✅  `MAC` 
+- ✅  `windows` 
+
+
 ### 支持功能
 
 - [x] [文件自动转码](#文件自动转码)
@@ -66,6 +75,7 @@ python3 ./test-demo/test.py
 - [x] [changelog自动生成](#changelog自动生成)
 - [ ] [基于AST代码检测](#基于AST代码检测)
 - [ ] [TDD工具](#TDD工具)
+
 
 #### 文件自动转码
 > 处理windows gbk 与 unix utf-8编码问题。确保纳入版本控制文件为utf-8标准编码。
