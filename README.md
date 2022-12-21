@@ -76,11 +76,14 @@ python3 ./test-demo/test.py
 - [ ] [基于AST代码检测](#基于AST代码检测)
 - [ ] [TDD工具](#TDD工具)
 
+**可以通过quanlity-components/config.py 配置功能**
+
+---
 
 #### 文件自动转码
 > 处理windows gbk 与 unix utf-8编码问题。确保纳入版本控制文件为utf-8标准编码。
 #### 代码格式化
-> 选用clang-format工具,在pre-commit hook中自动增量格式化.cpp .h文件为[google style](https://google.github.io/styleguide/cppguide.html)，确保版本库内代码风格统一
+> 选用clang-format工具,在pre-commit hook中自动增量格式化.cpp .h文件为[google style](https://google.github.io/styleguide/cppguide.html)，确保版本库内代码风格统一，支持git diff增量、文件增量。
 #### 代码静态检测
 > 选用google官方支持的cpplint作为检测工具，提高代码质量,无基础错误
 #### git_commit信息规范检测

@@ -44,10 +44,14 @@ def getcachesfilelist() -> list:
     return ret.stdout.split("\n")
 
 if __name__ == '__main__':
+    has_error = False
     list = getcachesfilelist()
     for file in list:
         if determine_suffix(file):
-            runcmd("cpplint %s %s"%(CPPLINTARG.replace(" ",""),file))
+            has_error = runcmd("cpplint %s %s"%(CPPLINTARG.replace(" ",""),file))
         else:
             pass
+    else:
+        if has_error:
+            sys.exit(1)
     sys.exit(0)

@@ -98,3 +98,6 @@ if [ $? == 1 ]
 then
     npx husky add .husky/post-commit "python3 "$ComponentsPath"/tasks/update-changelog.py ./"
 fi
+
+#---load user config
+python3 $ComponentsPath/config.py
