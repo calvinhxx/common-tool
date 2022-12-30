@@ -117,6 +117,7 @@ def add_pre_commit_task(hook_file, hook_content):
                     task_list.insert(task_list.index(config["pre-commit-tasks-group"]["pre_msg"]+line_feed)+1, hook_content+line_feed)
                     for i in task_list:
                         f_out.write(i)
+                shutil.copymode(hook_file, hook_file+"output_")
                 os.remove(hook_file)
                 os.rename(hook_file+"output_", hook_file)
 
