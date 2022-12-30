@@ -53,7 +53,8 @@ line_feed = "\n"
 if sys.platform == 'darwin':
     pass
 elif sys.platform == 'win32':
-    line_feed = "\n\r"
+    # line_feed = "\n\r"
+    pass
 
 def remove_task(hook_file, hook_content):
     with open(hook_file) as f, open(hook_file+"output_", "w") as f_out:
@@ -113,7 +114,6 @@ def add_pre_commit_task(hook_file, hook_content):
             elif hook_content == config["pre-commit-tasks-group"]["trans_coding"]["cmd"]:
                 with open(hook_file) as f, open(hook_file+"output_", "w") as f_out:
                     task_list = f.readlines()
-                    f_out.write(line_feed)
                     task_list.insert(task_list.index(config["pre-commit-tasks-group"]["pre_msg"]+line_feed)+1, hook_content+line_feed)
                     for i in task_list:
                         f_out.write(i)
